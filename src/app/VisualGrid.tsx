@@ -10,10 +10,6 @@ const EMOJIS_SEARCH = ["🔍", "🔎", "🕵️", "🕵️‍♂️", "🕵️�
 const EMOJI_SEARCH_CHANGE = 500;
 
 const VisualGrid = ({ movies, loading, onSelect }: VisualGridProps) => {
-  if (movies.length === 0 && !loading) {
-    return <div>No movies found</div>;
-  }
-
   const [emojiSearchIdx, setEmojiSearchIdx] = useState(1);
   useEffect(() => {
     const timer = setInterval(() => {
