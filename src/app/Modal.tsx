@@ -4,7 +4,7 @@ interface ModalProps {
 }
 
 const Modal = ({ searchResult, onClose }: ModalProps) => (
-  <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+  <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-10">
     <div className="bg-white p-4 rounded-lg w-3/4 h-3/4 text-black flex flex-col">
       <div>
         <h1 className="text-2xl">{searchResult.properties.title}</h1>

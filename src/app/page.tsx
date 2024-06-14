@@ -8,7 +8,6 @@ import Footer from "./Footer";
 import Modal from "./Modal";
 
 const DEFAULT_LIMIT = 16;
-const API_ENDPOINT = "http://localhost:8000";
 
 function App() {
   const [movies, setMovies] = useState<MovieSearchResult[]>([]);
@@ -20,7 +19,7 @@ function App() {
   useEffect(() => {
     setLoading(true);
     // Fetch movies from the API
-    fetch(`${API_ENDPOINT}/movies?limit=${DEFAULT_LIMIT}`)
+    fetch(`/api/movies?limit=${DEFAULT_LIMIT}`)
       .then((response) => response.json())
       .then((data) => setMovies(data))
       .catch((error) => console.error(error))
@@ -31,7 +30,7 @@ function App() {
     setLoading(true);
     // Fetch movies from the API
     fetch(
-      `${API_ENDPOINT}/movie_search_near_text/?query=${search}&limit=${DEFAULT_LIMIT}&alpha=${alpha}`
+      `/api/movies?query=${search}&limit=${DEFAULT_LIMIT}&alpha=${alpha}`
     )
       .then((response) => response.json())
       .then((data) => setMovies(data))
