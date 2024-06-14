@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { useEffect, useState } from "react";
+import { MovieSearchResult } from "./types";
+import VisualGrid from "./VisualGrid";
+import SearchFilter from "./SearchFilter";
+import styled from "styled-components";
+import Header from "./Header";
+import Footer from "./Footer";
+
+const DEFAULT_LIMIT = 28;
+const API_ENDPOINT = "http://localhost:8000";
+
+const AppGrid = styled.div`
+  grid-template-rows: auto auto 1fr auto;
+`;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [movies, setMovies] = useState<MovieSearchResult[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    setLoading(true);
+    // Fetch movies from the API
+    fetch(`${API_ENDPOINT}/movies?limit=${DEFAULT_LIMIT}`)
+      .then((response) => response.json())
+      .then((data) => setMovies(data))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const search = (search: string) => {
+    setLoading(true);
+    // Fetch movies from the API
+    fetch(
+      `${API_ENDPOINT}/movie_search_near_text/?query=${search}&limit=${DEFAULT_LIMIT}`
+    )
+      .then((response) => response.json())
+      .then((data) => setMovies(data))
+      .catch((error) => console.error(error))
+      .finally(() => setLoading(false));
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <AppGrid className="grid h-full">
+      <Header />
+      <SearchFilter onSearch={search} disabled={loading} />
+      <VisualGrid movies={movies} loading={loading} />
+      <Footer />
+    </AppGrid>
+  );
 }
 
-export default App
+export default App;
