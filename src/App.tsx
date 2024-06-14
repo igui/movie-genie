@@ -1,21 +1,19 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { MovieSearchResult } from "./types";
 import VisualGrid from "./VisualGrid";
 import SearchFilter from "./SearchFilter";
-import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
+import Modal from "./Modal";
 
-const DEFAULT_LIMIT = 28;
+const DEFAULT_LIMIT = 16;
 const API_ENDPOINT = "http://localhost:8000";
-
-const AppGrid = styled.div`
-  grid-template-rows: auto auto 1fr auto;
-`;
 
 function App() {
   const [movies, setMovies] = useState<MovieSearchResult[]>([]);
+  const [selectedMovie, setSelectedMovie] = useState<MovieSearchResult | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -28,7 +26,7 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-  const search = (search: string) => {
+  const search = (search: string, alpha: number) => {
     setLoading(true);
     // Fetch movies from the API
     fetch(
@@ -40,13 +38,24 @@ function App() {
       .finally(() => setLoading(false));
   };
 
+  const selectMovie = (movie: MovieSearchResult) => {
+    setSelectedMovie(movie);
+  };
+
+  const unsetMovie = () => {
+    setSelectedMovie(null);
+  };
+
   return (
-    <AppGrid className="grid h-full">
+    <div className="grid h-screen w-screen text-center">
       <Header />
       <SearchFilter onSearch={search} disabled={loading} />
-      <VisualGrid movies={movies} loading={loading} />
+      <VisualGrid movies={movies} loading={loading} onSelect={selectMovie} />
+      {selectedMovie && (
+        <Modal searchResult={selectedMovie} onClose={unsetMovie} />
+      )}
       <Footer />
-    </AppGrid>
+    </div>
   );
 }
 

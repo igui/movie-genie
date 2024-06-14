@@ -1,9 +1,9 @@
 import weaviateLogo from "./assets/weaviate.webp";
 
 const Header = () => (
-  <header>
-    <h1>Movie 🎥 Search 🔍</h1>
-    <h3>
+  <header className="pt-5 flex justify-center items-end" >
+    <h1 className="text-4xl w-full sm:w-auto">Movie 🎥 Search 🔍</h1>
+    <h3 className="text-sm sm:ml-4">
       <span>Powered by </span>
       <img
         className="inline"
