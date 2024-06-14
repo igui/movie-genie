@@ -166,6 +166,8 @@ cython_debug/
 wikipedia-movies
 wikipedia-movies.zip
 
+# Next.js
+.next
 
 # Logs
 logs

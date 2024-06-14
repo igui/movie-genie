@@ -47,7 +47,7 @@ function SearchFilter({ onSearch, disabled }: SearchFilterProps) {
         <div className="w-full flex">
           <input
             ref={inputRef}
-            className="grow rounded-md border-0 ring-1 ring-inset text-sm p-2"
+            className="grow rounded-md border-0 ring-1 ring-inset text-sm p-2 text-black"
             type="text"
             placeholder="About a warrior in Rome..."
             readOnly={disabled}

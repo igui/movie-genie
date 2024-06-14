@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import Modal from "./Modal";
 
 const DEFAULT_LIMIT = 16;
-const API_ENDPOINT = "http://localhost:8000";
+const API_ENDPOINT = "/api";
 
 function App() {
   const [movies, setMovies] = useState<MovieSearchResult[]>([]);
@@ -30,7 +30,7 @@ function App() {
     setLoading(true);
     // Fetch movies from the API
     fetch(
-      `${API_ENDPOINT}/movie_search_near_text/?query=${search}&limit=${DEFAULT_LIMIT}&alpha=${alpha}`
+      `${API_ENDPOINT}/movies/?query=${search}&limit=${DEFAULT_LIMIT}&alpha=${alpha}`
     )
       .then((response) => response.json())
       .then((data) => setMovies(data))
