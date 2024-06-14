@@ -23,10 +23,15 @@ const VisualGrid = ({ movies, loading, onSelect }: VisualGridProps) => {
   });
 
   return (
-    <div className="relative">
-      { !loading && (<div>Step 2: Select a movie from the {`${movies.length}`} movies found</div>) }
-      { loading && (<div>Searching for movies...</div>)}
-      <div className="grid lg:grid-cols-8 md:grid-cols-6 grid-cols-4">
+    <div className="relative mt-5">
+      {!loading && (
+        <div>
+          <div className="inline-block text-md">Step 2:</div> 
+          <div className="text-sm">Select a movie from the {`${movies.length}`} movies found</div>
+        </div>
+      )}
+      {loading && <div>Searching for movies...</div>}
+      <div className="grid lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-2">
         {movies.map((movie) => (
           <div
             key={movie.properties.movie_id}
@@ -44,7 +49,7 @@ const VisualGrid = ({ movies, loading, onSelect }: VisualGridProps) => {
                 <p>{movie.metadata.certainty.toPrecision(3)}</p>
               </div>
             )}
-            <div className="bg-black bg-opacity-20 absolute bottom-0 left-0 w-full h-full hover:bg-opacity-0 duration-300"/>
+            <div className="bg-black bg-opacity-20 absolute bottom-0 left-0 w-full h-full hover:bg-opacity-0 duration-300" />
           </div>
         ))}
       </div>

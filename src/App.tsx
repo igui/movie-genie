@@ -30,7 +30,7 @@ function App() {
     setLoading(true);
     // Fetch movies from the API
     fetch(
-      `${API_ENDPOINT}/movie_search_near_text/?query=${search}&limit=${DEFAULT_LIMIT}`
+      `${API_ENDPOINT}/movie_search_near_text/?query=${search}&limit=${DEFAULT_LIMIT}&alpha=${alpha}`
     )
       .then((response) => response.json())
       .then((data) => setMovies(data))
