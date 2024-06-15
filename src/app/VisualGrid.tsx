@@ -30,19 +30,19 @@ const VisualGrid = ({ movies, loading, onSelect }: VisualGridProps) => {
       <div className="grid lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-2">
         {movies.map((movie) => (
           <div
-            key={movie.properties.movie_id}
+            key={movie.movie_id}
             className="h-60 bg-cover bg-center relative"
             style={{
-              backgroundImage: `url(/movie-images/${movie.properties.movie_id}.jpg)`,
+              backgroundImage: `url(/movie-images/${movie.movie_id}.jpg)`,
             }}
             onClick={() => onSelect(movie)}
           >
             <h1 className="bg-black bg-opacity-50 text-white p-2">
-              {movie.properties.title}
+              {movie.title}
             </h1>
-            {movie.metadata.certainty && (
+            {movie.metadata.score && (
               <div className="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2">
-                <p>{movie.metadata.certainty.toPrecision(3)}</p>
+                <p>{movie.metadata.score.toPrecision(3)}</p>
               </div>
             )}
             <div className="bg-black bg-opacity-20 absolute bottom-0 left-0 w-full h-full hover:bg-opacity-0 duration-300" />
