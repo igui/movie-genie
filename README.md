@@ -8,9 +8,7 @@ LLM based Recommender that suggests great movies for you and your friends.
 
 It has a list of 12K+ movies from the 1990's until today from the Kaggle's [wikimedia-movies](https://www.kaggle.com/datasets/exactful/wikipedia-movies) dataset. The search capabilites are powered by [Weaviate](https://weaviate.io/) and [OpenAI](https://platform.openai.com/) to generate vector embeddings for search. The frontend is a [Next.js](https://nextjs.org/) app hosted in [Vercel](https://vercel.com/). The database is a [Weaviate Cloud](https://weaviate.io/developers/wcs) cluster where we store the movies and their information. We store images locally to save space online.
 
-
-
-You can check it out online at https://vercel.com/ignacio-avas-projects/movie-genie 
+You can check it out online at https://movie-genie-lovat.vercel.app
 
 ## Requirements
 
@@ -37,5 +35,7 @@ Provided you have data, just run `npm run dev` and then go to `http://localhost:
 
 It is a very simple project where Python is only used for the import pipeline and Next.js is used for the frontend.
 
-- `import_movies.ipynb` has the import pipeline. If you run it, it woul
+- `import_movies.ipynb` has the import pipeline. If you run it, it will import the Kaggle dataset 
+   into the `wikipedia-movies` directory and then into the Weaviate Cloud collection
 - `src` has the Next.js app
+- `linkedin_clustering.ipynb` Explores how to cluster data from LinkedIn postings related to ML or AI
